@@ -33,7 +33,7 @@ public class DatabaseTableToCSV implements AutoCloseable {
 
         Properties info = new Properties();
         info.put("user", username);
-        info.put("password", password);
+        info.put("password", password==null?"":password);
         Driver driver;
         logger.info("Loading driver of " + dbType);
         if (dbType.trim().toUpperCase().equals(MYSQL)) {
@@ -48,7 +48,10 @@ public class DatabaseTableToCSV implements AutoCloseable {
         } else if (dbType.trim().toUpperCase().equals(POSTGRESQL)) {
             driver = new org.postgresql.Driver();
             databaseType = DatabaseType.POSTGRESQL;
-        } else {
+        } else if (dbType.trim().toUpperCase().equals("H2")) {
+            driver = new org.h2.Driver();
+            databaseType = DatabaseType.H2;
+        }  else {
             throw new SQLException("The Database is not supported: " + dbType);
         }
         logger.info("Driver loaded!");

@@ -1,5 +1,8 @@
 package tech.comfortheart.util;
 
+import org.junit.Test;
+import tech.comfortheart.DatabaseToCsvApp;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.logging.Logger;
@@ -18,6 +21,34 @@ public class DatabaseTableToCSVTest {
     String mssserverUrl = "jdbc:sqlserver://localhost:1433;DatabaseName=test";
     String mssserverUsr = "hello";
     String mssserverPsw = "world@1234!";
+
+    @Test
+    public void stupidTests() throws SQLException {
+        DatabaseTableToCSV app = null;
+        try {
+            DatabaseConfig databaseConfig = new DatabaseConfig();
+            databaseConfig.setDatabaseType(SupportedDatabase.MYSQL);
+            databaseConfig.setUsername(mysqlUser);
+            databaseConfig.setPassword(mysqlPsw);
+            databaseConfig.setJdbcUrl(mysqlUrl);
+            app = new DatabaseTableToCSV(databaseConfig);
+
+        } catch (SQLException e) {
+
+        }
+
+        try {
+
+            new DatabaseTableToCSV(postgresUrl, SupportedDatabase.POSTGRESQL, pgUsr, pgPsw);
+
+        } catch (SQLException e) {}
+
+        try {
+
+            new DatabaseTableToCSV(mssserverUrl, SupportedDatabase.SQL_SQLSERVER, mssserverUsr, mssserverUsr);
+
+        } catch (SQLException e) {}
+    }
 
 //    @Test
     public void testMySQLConvert() throws SQLException, IOException {
