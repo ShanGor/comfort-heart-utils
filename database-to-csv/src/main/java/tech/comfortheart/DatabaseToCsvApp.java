@@ -21,10 +21,10 @@ import java.util.logging.Logger;
 public class DatabaseToCsvApp {
     private static Logger logger = Logger.getLogger(DatabaseToCsvApp.class.getSimpleName());
     private static final int PROCESS_THREADS = 10;
-    public static final String APP_ID_FILE = ".database_to_csv_app_id";
-    public static final String KEYSTORE_FILE_NAME = "db2csv.jks";
-    public static final String CERT_FILENAME = "db2csv.cer";
-    public static final String ALIAS_NAME = "db2csv";
+    public static String APP_ID_FILE = ".database_to_csv_app_id";
+    public static String KEYSTORE_FILE_NAME = "db2csv.jks";
+    public static String CERT_FILENAME = "db2csv.cer";
+    public static String ALIAS_NAME = "db2csv";
 
     public static void main( String[] args ) throws Exception {
         if (args.length != 1 && args.length != 2) {

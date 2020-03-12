@@ -178,17 +178,17 @@ public class DatabaseConfig {
 
         String target = source;
 
-        if (source.indexOf("$today") > 0) {
+        if (source.indexOf("$today") >= 0) {
             String today = date.format(formatter);
             target = target.replace("$today", today);
         }
 
-        if (source.indexOf("$yesterday") > 0) {
+        if (source.indexOf("$yesterday") >= 0) {
             String yesterday = date.minusDays(1).format(formatter);
             target = target.replace("$yesterday", yesterday);
         }
 
-        if (source.indexOf("$tomorrow") > 0) {
+        if (source.indexOf("$tomorrow") >= 0) {
             String tomorrow = date.plusDays(1).format(formatter);
             target = target.replace("$tomorrow", tomorrow);
         }
