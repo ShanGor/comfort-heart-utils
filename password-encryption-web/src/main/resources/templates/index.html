@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Encryption</title>
+    <style>
+        #plainText {
+          border-radius: 4px;
+        }
+
+        #encryptedText {
+          border-radius: 4px;
+        }
+
+        #hr {
+          margin-top=200px;
+          width:70%;
+          height:3px;
+          border:none;
+          border-top:3px double grey;
+        }
+
+        #confirm {
+            display: inline-block;
+            padding: .3em .5em;
+            background-image: linear-gradient(#8eb349, #5f7c22);
+            border: 1px solid rgba(0,0,0,.2);
+            border-radius: .3em;
+            box-shadow: 0 1px white inset;
+            text-align: center;
+            text-shadow: 0 1px 1px black;
+            color:white;
+            font-weight: bold;
+            font-size: 12pt;
+        }
+        button:hover {
+            cursor:pointer;
+        }
+    </style>
+    <script>
+
+        var url = "/encrypt";
+        function encrypt() {
+          // Clear the encrypted text first!
+          document.getElementById("encryptedText").value = "";
+
+          var plainText = document.getElementById("plainText").value;
+          if (plainText == null || plainText.trim() == "") {
+            alert("Please input password to encrypt!");
+            return;
+          }
+
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", url);
+          xhr.setRequestHeader("Content-type", "text/plain");
+          xhr.send(plainText);
+
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+              if (xhr.status == 200) {
+                document.getElementById("encryptedText").value = xhr.responseText;
+                return;
+              } else {
+                alert("Error: " + xhr.status);
+                return;
+              }
+            }
+          };
+        }
+    </script>
+</head>
+<body>
+
+<div align="center">
+    <h1>Password Encryption</h1>
+    <table>
+        <tr>
+            <td>Password: </td>
+            <td><input id="plainText" type="password" /></td>
+            <td><button id="confirm" onclick="encrypt()">Encrypt</button></td>
+        </tr>
+        <tr><td colspan="3"> </td></tr>
+        <tr>
+            <td colspan="3"></td>
+        </tr>
+        <tr><td colspan="3"> </td></tr>
+        <tr>
+            <td>Encrypted Text:</td>
+            <td colspan="2"><textarea id="encryptedText" rows="10" cols="60"></textarea></td>
+        </tr>
+    </table>
+    <br />
+    <hr id="hr" />
+    <div>Powered by Insurance IT - China</div>
+</div>
+
+</body>
+</html>
